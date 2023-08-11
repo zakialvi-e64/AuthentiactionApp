@@ -63,8 +63,8 @@ Router.post("/login",(req,res)=>{
                 .then((match)=>{
                     if(match)
                     {
-                        const token = Jwt.sign({_id: savedUser._id, name: savedUser.name, email: savedUser.email, password: savedUser.password},jwtSecret);
-                        const {_id, name, email, password} = savedUser;
+                        const token = Jwt.sign({_id: savedUser._id, name: savedUser.name},jwtSecret);
+                        const {_id, name, email} = savedUser;
 
                         res.json({token, user:{_id, name, email}})
                     }
@@ -79,6 +79,24 @@ Router.post("/login",(req,res)=>{
 
 
         })
+});
+
+
+//--- Get all records ---
+Router.get("/usersList", (req, res) => {
+    User.find()
+        .then(users => {
+            if (users.length > 0) {
+                res.status(200).json(users);
+                
+            } else {
+                res.status(404).json();
+            }
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).json();
+        });
 });
 
 export default Router;

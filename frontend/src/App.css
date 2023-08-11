@@ -2,6 +2,19 @@
   text-align: center;
 }
 
+body{
+  margin: 0;
+  font-family: "Lato", sans-serif;
+  /* font-family: 'Open Sans', sans-serif; */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 17px;
+  padding: 0;
+  box-sizing: border-box;
+  background-image: url("../src/images/blue.jpg");
+  background-size: cover;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
