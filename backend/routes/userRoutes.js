@@ -81,15 +81,16 @@ Router.post("/login",(req,res)=>{
         })
 });
 
-
-//--- Get all records ---
 Router.get("/usersList", (req, res) => {
     User.find()
         .then(users => {
-            if (users.length > 0) {
+            if (users.length > 0) 
+            {
                 res.status(200).json(users);
                 
-            } else {
+            } 
+            else 
+            {
                 res.status(404).json();
             }
         })

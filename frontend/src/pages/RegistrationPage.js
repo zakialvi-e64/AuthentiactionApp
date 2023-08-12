@@ -1,14 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import mainImage from '../images/MainImage.png';
+import Cookies from 'js-cookie';
 
 const RegistrationPage = () => {
     const navigate = useNavigate();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    const LocalUser = Cookies.get('user');
+
+    useEffect(() => {
+        if (LocalUser) {
+            navigate('/profile');
+        }
+    }, []);
 
     // Toast Functions
     const notifyError = (msg) => toast.error(msg);
@@ -62,58 +71,10 @@ const RegistrationPage = () => {
     };
 
     return (
-        <div
-            style={{
-                height: '575px',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-            }}
-        >
-            <div
-                className="homie"
-                style={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    width: '1000px',
-                    alignItems: 'flex-start',
-                    gap: '100px',
-                }}
-            >
-                <div
-                    style={{
-                        width: '500px',
-                        height: '500px',
-                        textAlign: 'center',
-                        borderRadius: '20px',
-                        display: 'flex',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                    }}
-                >
-                    <img
-                        style={{ borderRadius: '250px' }}
-                        src={mainImage}
-                        alt="MainImage"
-                    />
-                </div>
-
-                <div
-                    style={{
-                        width: '500px',
-                        height: '500px',
-                        color: 'black',
-                        backgroundColor: '#E7E7E7',
-                        textAlign: 'center',
-                        borderRadius: '20px',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                    }}
-                >
-                    <h2>Sign Up Here</h2>
+        <div className="d-flex justify-content-center align-items-center" style={{ height: '575px' }}>
+            <div className="homie d-flex justify-content-space-between w-100" style={{ gap: '100px', maxWidth: '1000px' }}>
+                <div className="text-center bg-light p-4 rounded" style={{ width: '500px', height: '500px', order: 2 }}>
+                    <h2>Register Here</h2>
                     <form onSubmit={handleSubmit}>
                         <input
                             type="text"
@@ -123,14 +84,8 @@ const RegistrationPage = () => {
                             onChange={(e) => {
                                 setName(e.target.value);
                             }}
-                            style={{
-                                width: '300px',
-                                height: '40px',
-                                borderRadius: '10px',
-                                fontSize: '20px',
-                            }}
+                            className="form-control mb-3"
                         />
-                        <br />
                         <input
                             type="email"
                             value={email}
@@ -139,14 +94,8 @@ const RegistrationPage = () => {
                             onChange={(e) => {
                                 setEmail(e.target.value);
                             }}
-                            style={{
-                                width: '300px',
-                                height: '40px',
-                                borderRadius: '10px',
-                                fontSize: '20px',
-                            }}
+                            className="form-control mb-3"
                         />
-                        <br />
                         <input
                             type="password"
                             value={password}
@@ -155,42 +104,28 @@ const RegistrationPage = () => {
                             onChange={(e) => {
                                 setPassword(e.target.value);
                             }}
-                            style={{
-                                width: '300px',
-                                height: '40px',
-                                borderRadius: '10px',
-                                fontSize: '20px',
-                            }}
+                            className="form-control mb-3"
                         />
-                        <br />
                         <button
                             type="submit"
-                            style={{
-                                cursor: 'pointer',
-                                width: '300px',
-                                height: '45px',
-                                borderRadius: '10px',
-                                background: '#187DEC',
-                                color: 'white',
-                                fontWeight: 'bolder',
-                                fontSize: '20px',
-                            }}
+                            className="btn btn-primary btn-block mb-3"
                         >
-                            Sign Up
+                            Register
                         </button>
                     </form>
-                    <br />
-                    <hr style={{ border: '1px solid gray', width: '350px' }} />
-                    <p style={{ fontWeight: 'bolder', fontSize: '20px' }}>
+                    <hr className="my-4" />
+                    <p className="font-weight-bold">
                         Already have an account?{' '}
-                        <Link to="/">
-                            <span
-                                style={{ fontWeight: 'bold', color: 'blue' }}
-                            >
-                                Sign In
-                            </span>
+                        <Link to="/" className="font-weight-bold text-primary">
+                            Login
                         </Link>
                     </p>
+                </div>
+
+                <div className="text-center" style={{ width: '500px', height: '500px', borderRadius: '20px', order: 1 }}>
+                    <div className="d-flex justify-content-center align-items-center h-100">
+                        <img className="rounded-circle" src={mainImage} alt="img" />
+                    </div>
                 </div>
             </div>
         </div>
