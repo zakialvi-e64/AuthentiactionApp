@@ -75,7 +75,7 @@ const LoginPage = () => {
                     </div>
                 </div>
 
-                <div className="text-center bg-light p-4 rounded" style={{ width: '500px', height: '500px' }}>
+                <div className="text-center bg-light p-4 rounded" style={{ width: '500px', height: '450px' }}>
                     <h2>Login To Your Account</h2>
                     <form onSubmit={handleSubmit}>
                         <input

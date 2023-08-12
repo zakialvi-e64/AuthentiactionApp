@@ -73,7 +73,7 @@ const RegistrationPage = () => {
     return (
         <div className="d-flex justify-content-center align-items-center" style={{ height: '575px' }}>
             <div className="homie d-flex justify-content-space-between w-100" style={{ gap: '100px', maxWidth: '1000px' }}>
-                <div className="text-center bg-light p-4 rounded" style={{ width: '500px', height: '500px', order: 2 }}>
+                <div className="text-center bg-light p-4 rounded" style={{ width: '500px', height: '450px', order: 2 }}>
                     <h2>Register Here</h2>
                     <form onSubmit={handleSubmit}>
                         <input
