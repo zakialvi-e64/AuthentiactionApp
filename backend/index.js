@@ -14,7 +14,7 @@ app.use(express.json());
 app.use("/api",Router);
 
 mongoose.connect(mongoURL);
-
+////just checking
 mongoose.connection.on("connected",()=>{
     console.log("Successfully connected to MongoDB")
 });
