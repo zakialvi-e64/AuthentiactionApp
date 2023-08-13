@@ -34,9 +34,7 @@ const LoginPage = () => {
         }
 
         // Sending Data To Server
-        axios
-            .post(
-                '/login',
+        axios.post('/login',
                 {
                     email: email,
                     password: password,
@@ -50,7 +48,7 @@ const LoginPage = () => {
             .then((response) => {
                 const data = response.data;
                 if (data.error) {
-                    notifyError(data.error);
+                    notifyError("Invalid Password");
                 } else {
                     notifySuccess('Signed In Successfully');
                     setCookie('jwt', data.token);
@@ -58,6 +56,8 @@ const LoginPage = () => {
 
                     navigate('/profile');
                 }
+
+                
             })
             .catch((error) => {
                 console.error(error);
