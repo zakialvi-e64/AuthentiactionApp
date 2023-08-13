@@ -1,25 +1,25 @@
 import React from 'react';
-import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 const Navbar = () => {
-
     const navigate = useNavigate();
-    const LocalUser = Cookies.get("user");
+    const [cookies, , removeCookies] = useCookies(['jwt', 'user']);
+    const user = cookies.user;
 
     const LogOut = () => {
-        Cookies.remove('jwt');
-        Cookies.remove("user");
-        navigate("/");
+        removeCookies('jwt');
+        removeCookies('user');
+        navigate('/');
     }
 
     return (
         <div>
-            {LocalUser ? (
+            {user ? (
                 <div className="bg-light rounded-bottom p-2 d-flex align-items-center justify-content-center">
                     <ul className="d-flex justify-content-between align-items-center list-unstyled m-0 p-0 gap-2 w-100">
                         <li className="d-flex align-items-center justify-content-center flex-grow-1">
-                            <h3 className="m-0">Welcome {JSON.parse(LocalUser).name}</h3>
+                            <h3 className="m-0">Welcome {user.name}</h3>
                         </li>
                         <li className="ml-auto">
                             <button

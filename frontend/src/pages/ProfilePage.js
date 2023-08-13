@@ -1,21 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import Cookies from 'js-cookie';
 import { useNavigate } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 const ProfilePage = () => {
-
     const [users, setUsers] = useState([]);
     const navigate = useNavigate();
-    const LocalUser = Cookies.get("user");
+    const [cookies] = useCookies(['user']);
 
     useEffect(() => {
-        if (!LocalUser) {
-            navigate("/");
+        if (!cookies.user) {
+            navigate('/');
         } else {
             fetchUsers();
         }
-    }, []);
+    }, [cookies.user]);
 
     const fetchUsers = async () => {
         try {
@@ -37,7 +36,7 @@ const ProfilePage = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {users.map(user => (
+                    {users.map((user) => (
                         <tr key={user._id}>
                             <td>{user.name}</td>
                             <td>{user.email}</td>
@@ -47,6 +46,6 @@ const ProfilePage = () => {
             </table>
         </div>
     );
-}
+};
 
 export default ProfilePage;

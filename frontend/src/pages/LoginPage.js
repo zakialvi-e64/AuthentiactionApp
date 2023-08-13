@@ -1,26 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Cookies from 'js-cookie';
+import { useCookies } from 'react-cookie';
 import mainImage from '../images/MainImage.png';
-
 import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
-    const LocalUser = Cookies.get('user');
+    const [cookies, setCookie] = useCookies(['jwt', 'user']);
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
     useEffect(() => {
-        if (LocalUser) {
+        if (cookies.user) {
             navigate('/profile');
         }
-    }, []);
+    }, [cookies.user]);
 
     // Email and Password Regex
     const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    
 
     // Toast Functions
     const notifyError = (msg) => toast.error(msg);
@@ -55,8 +53,8 @@ const LoginPage = () => {
                     notifyError(data.error);
                 } else {
                     notifySuccess('Signed In Successfully');
-                    Cookies.set('jwt', data.token);
-                    Cookies.set('user', JSON.stringify(data.user));
+                    setCookie('jwt', data.token);
+                    setCookie('user', JSON.stringify(data.user));
 
                     navigate('/profile');
                 }
