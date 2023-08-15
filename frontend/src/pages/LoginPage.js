@@ -52,6 +52,7 @@ const LoginPage = () => {
                 } else {
                     notifySuccess('Signed In Successfully');
                     //setCookie('jwt', data.token);
+                    
                     setCookie('user', JSON.stringify(data.user));
 
                     navigate('/profile');
