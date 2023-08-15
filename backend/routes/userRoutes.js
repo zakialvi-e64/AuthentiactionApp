@@ -70,7 +70,7 @@ Router.post("/login",(req,res)=>{
                             httpOnly: true,
                             secure: process.env.NODE_ENV === 'production',
                             sameSite: 'strict',
-                            maxAge: 3600000, // Set cookie expiration time (in milliseconds)
+                            //maxAge: 3600000, // Set cookie expiration time (in milliseconds)
                         });
 
                         const {_id, name, email} = savedUser;
