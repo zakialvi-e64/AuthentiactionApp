@@ -24,7 +24,7 @@ const RegistrationPage = () => {
 
     // Email and Password Regex
     const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
+    //const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/;
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -33,12 +33,13 @@ const RegistrationPage = () => {
         if (!emailRegex.test(email)) {
             notifyError('Invalid Email');
             return;
-        } else if (!passwordRegex.test(password)) {
-            notifyError(
-                'Password must contain at least eight characters, including at least one number and includes both lower and upper case letters and special characters for example #,?,!'
-            );
-            return;
-        }
+        } 
+        // else if (!passwordRegex.test(password)) {
+        //     notifyError(
+        //         'Password must contain at least eight characters, including at least one number and includes both lower and upper case letters and special characters for example #,?,!'
+        //     );
+        //     return;
+        // }
 
         // Sending Data To Server
         axios
