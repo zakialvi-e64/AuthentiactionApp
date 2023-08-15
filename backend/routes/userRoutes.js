@@ -65,9 +65,17 @@ Router.post("/login",(req,res)=>{
                     {
                         const token = Jwt.sign({_id: savedUser._id, name: savedUser.name},jwtSecret);
 
+
+                        res.cookie('token',token,{
+                            httpOnly: true,
+                            secure: process.env.NODE_ENV === 'production',
+                            sameSite: 'strict',
+                            maxAge: 3600000, // Set cookie expiration time (in milliseconds)
+                        })
+
                         const {_id, name, email} = savedUser;
 
-                        res.json({ token, user:{_id, name, email}})
+                        res.json({ user:{_id, name, email}})
                     }
                     else
                     {
@@ -81,6 +89,12 @@ Router.post("/login",(req,res)=>{
 
         })
 });
+
+Router.get("/logout", (req,res)=>{
+    res.clearCookie('token');
+    res.status(200).json({message:"Logout Successfull"});
+    
+})
 
 Router.get("/usersList", (req, res) => {
     User.find()
