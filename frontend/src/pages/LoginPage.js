@@ -7,18 +7,18 @@ import { Link, useNavigate } from 'react-router-dom';
 
 
 const LoginPage = () => {
-    const [cookies, setCookie] = useCookies(['user']);
+    const [cookies, setCookie] = useCookies(['userInfo']);
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     
-
+    
 
     useEffect(() => {
-        if (cookies.user) {
+        if (cookies.userInfo) {
             navigate('/profile');
         }
-    }, [cookies.user]);
+    }, [cookies.userInfo]);
 
     
 
@@ -56,7 +56,7 @@ const LoginPage = () => {
                     notifyError("Invalid Password");
                 } else {
                     notifySuccess('Signed In Successfully');
-                    setCookie('user', data.user);
+                    setCookie('userInfo', data.userInfo);
                     navigate('/profile');
                 }
 

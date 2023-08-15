@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
@@ -6,18 +6,14 @@ import axios from 'axios';
 
 const Navbar = () => {
     const navigate = useNavigate();
-    const [cookies, , removeCookies] = useCookies(['user']);
-    const user = cookies.user;
-
-
+    const [cookies, , removeCookies] = useCookies(['userInfo']);
+    const user = cookies.userInfo;
     
 
     const LogOut = () => {
         axios.get('/logout');
-        removeCookies('user');
+        removeCookies('userInfo');
         navigate('/');
-        
-        
     }
 
     return (
@@ -41,7 +37,7 @@ const Navbar = () => {
                 </div>
             ) : (
                 <></>
-            )}
+            )}  
         </div>
     );
 }

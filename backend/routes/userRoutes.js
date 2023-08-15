@@ -71,9 +71,9 @@ Router.post("/login",(req,res)=>{
                             httpOnly: true,
                         })
 
-                        const {name} = savedUser;
+                        const {name, email} = savedUser;
 
-                        res.json({ user:{name}})
+                        res.json({ userInfo:{name, email}})
                     }
                     else
                     {

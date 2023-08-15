@@ -6,15 +6,15 @@ import { useCookies } from 'react-cookie';
 const ProfilePage = () => {
     const [users, setUsers] = useState([]);
     const navigate = useNavigate();
-    const [cookies] = useCookies(['user']);
+    const [cookies] = useCookies(['userInfo']);
 
     useEffect(() => {
-        if (!cookies.user) {
+        if (!cookies.userInfo) {
             navigate('/');
         } else {
             fetchUsers();
         }
-    }, [cookies.user]);
+    }, [cookies.userInfo]);
 
     const fetchUsers = async () => {
         try {

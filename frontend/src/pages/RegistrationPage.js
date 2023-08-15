@@ -10,13 +10,13 @@ const RegistrationPage = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [cookies] = useCookies(['user']);
+    const [cookies] = useCookies(['userInfo']);
 
     useEffect(() => {
-        if (cookies.user) {
+        if (cookies.userInfo) {
             navigate('/profile');
         }
-    }, [cookies.user]);
+    }, [cookies.userInfo]);
 
     // Toast Functions
     const notifyError = (msg) => toast.error(msg);
