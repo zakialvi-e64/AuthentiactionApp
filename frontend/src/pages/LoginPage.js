@@ -6,7 +6,7 @@ import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 
 const LoginPage = () => {
-    const [cookies, setCookie] = useCookies(['jwt', 'user']);
+    const [cookies, setCookie] = useCookies(['user']);
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -51,7 +51,7 @@ const LoginPage = () => {
                     notifyError("Invalid Password");
                 } else {
                     notifySuccess('Signed In Successfully');
-                    setCookie('jwt', data.token);
+                    //setCookie('jwt', data.token);
                     setCookie('user', JSON.stringify(data.user));
 
                     navigate('/profile');

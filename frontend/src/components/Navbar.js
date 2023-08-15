@@ -1,14 +1,15 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
+import Cookies from 'react-cookie';
 
 const Navbar = () => {
     const navigate = useNavigate();
-    const [cookies, , removeCookies] = useCookies(['jwt', 'user']);
+    const [cookies, , removeCookies] = useCookies(['token', 'user']);
     const user = cookies.user;
 
     const LogOut = () => {
-        removeCookies('jwt');
+        removeCookies('token');
         removeCookies('user');
         navigate('/');
     }

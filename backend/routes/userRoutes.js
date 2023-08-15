@@ -64,6 +64,15 @@ Router.post("/login",(req,res)=>{
                     if(match)
                     {
                         const token = Jwt.sign({_id: savedUser._id, name: savedUser.name},jwtSecret);
+
+                        // Set HttpOnly cookie with the token
+                        res.cookie('token', token, {
+                            httpOnly: true,
+                            secure: process.env.NODE_ENV === 'production',
+                            sameSite: 'strict',
+                            maxAge: 3600000, // Set cookie expiration time (in milliseconds)
+                        });
+
                         const {_id, name, email} = savedUser;
 
                         res.json({token, user:{_id, name, email}})
