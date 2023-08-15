@@ -5,6 +5,7 @@ import mainImage from '../images/MainImage.png';
 import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 
+
 const LoginPage = () => {
     const [cookies, setCookie] = useCookies(['user']);
     const navigate = useNavigate();
@@ -52,7 +53,7 @@ const LoginPage = () => {
                 } else {
                     notifySuccess('Signed In Successfully');
                     //setCookie('jwt', data.token);
-                    
+                    //Cookies.set('token', data.token);
                     setCookie('user', JSON.stringify(data.user));
 
                     navigate('/profile');

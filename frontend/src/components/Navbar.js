@@ -6,6 +6,7 @@ import Cookies from 'js-cookie';
 const Navbar = () => {
     const navigate = useNavigate();
     const [cookies, , removeCookies] = useCookies(['user']);
+    const localUser = Cookies.get()
     const user = cookies.user;
 
     const LogOut = () => {

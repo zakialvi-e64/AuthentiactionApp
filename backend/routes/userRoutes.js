@@ -68,14 +68,14 @@ Router.post("/login",(req,res)=>{
                         // Set HttpOnly cookie with the token
                         res.cookie('token', token, {
                             httpOnly: true,
-                            secure: process.env.NODE_ENV === 'production',
-                            sameSite: 'strict',
-                            //maxAge: 3600000, // Set cookie expiration time (in milliseconds)
+                            // secure: process.env.NODE_ENV === 'production',
+                            // sameSite: 'strict',
+                            // maxAge: 30000, // Set cookie expiration time (in milliseconds)
                         });
 
                         const {_id, name, email} = savedUser;
 
-                        res.json({token, user:{_id, name, email}})
+                        res.json({ user:{_id, name, email}})
                     }
                     else
                     {
