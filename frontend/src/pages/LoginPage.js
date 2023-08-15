@@ -56,7 +56,7 @@ const LoginPage = () => {
                     notifyError("Invalid Password");
                 } else {
                     notifySuccess('Signed In Successfully');
-                    setCookie('user', JSON.stringify(data.user));
+                    setCookie('user', data.user);
                     navigate('/profile');
                 }
 

@@ -63,19 +63,17 @@ Router.post("/login",(req,res)=>{
                 .then((match)=>{
                     if(match)
                     {
-                        const token = Jwt.sign({_id: savedUser._id, name: savedUser.name},jwtSecret);
+                        const payload = {_id: savedUser._id, name: savedUser.name};
+                        const token = Jwt.sign(payload, jwtSecret);
 
 
                         res.cookie('token',token,{
                             httpOnly: true,
-                            secure: process.env.NODE_ENV === 'production',
-                            sameSite: 'strict',
-                            maxAge: 3600000, // Set cookie expiration time (in milliseconds)
                         })
 
-                        const {_id, name, email} = savedUser;
+                        const {name} = savedUser;
 
-                        res.json({ user:{_id, name, email}})
+                        res.json({ user:{name}})
                     }
                     else
                     {
