@@ -7,16 +7,20 @@ import { Link, useNavigate } from 'react-router-dom';
 
 
 const LoginPage = () => {
-    const [cookies, setCookie] = useCookies(['user']);
+    const [cookies, setCookie] = useCookies(['jwt','user']);
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    
+
 
     useEffect(() => {
         if (cookies.user) {
             navigate('/profile');
         }
     }, [cookies.user]);
+
+    
 
     // Email and Password Regex
     const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
@@ -52,10 +56,8 @@ const LoginPage = () => {
                     notifyError("Invalid Password");
                 } else {
                     notifySuccess('Signed In Successfully');
-                    //setCookie('jwt', data.token);
-                    //Cookies.set('token', data.token);
+                    setCookie('jwt', data.token);
                     setCookie('user', JSON.stringify(data.user));
-
                     navigate('/profile');
                 }
 

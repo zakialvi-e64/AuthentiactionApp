@@ -1,19 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useCookies } from 'react-cookie';
-import Cookies from 'js-cookie';
+
 
 const Navbar = () => {
     const navigate = useNavigate();
-    const [cookies, , removeCookies] = useCookies(['user']);
-    const localUser = Cookies.get()
+    const [cookies, , removeCookies] = useCookies(['jwt', 'user']);
     const user = cookies.user;
 
+
+    
+
     const LogOut = () => {
-        //removeCookies('token');
-        Cookies.remove("token");
+
         removeCookies('user');
+        removeCookies('jwt');
         navigate('/');
+        
+        
     }
 
     return (
