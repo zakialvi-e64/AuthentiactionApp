@@ -2,12 +2,9 @@ import Jwt  from "jsonwebtoken";
 import dotenv from "dotenv";
 import User from "../models/userModel.js";
 
-
 dotenv.config();
 
-
-
-const Auth = (req, res, next) => {
+const auth = (req, res, next) => {
     const jwtSecret = process.env.JWT_SECRET;
     const authHeader = req.header("Authorization");
     const token = authHeader && authHeader.split(" ")[1];
@@ -37,4 +34,4 @@ const Auth = (req, res, next) => {
     });
 }
 
-export default Auth;
+export default auth;

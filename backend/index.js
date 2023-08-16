@@ -2,9 +2,9 @@ import express from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 import User from "./models/userModel.js";
-import Protect from "./routes/protectedRoutes.js";
-import Guest from "./routes/guestRoutes.js";
-import Auth from "./routes/auth.js";
+import authRoutes from "./routes/authRoutes.js";
+import guestRoutes from "./routes/guestRoutes.js";
+import auth from "./middlewares/auth.js";
 
 
 dotenv.config();
@@ -14,8 +14,8 @@ const port = process.env.PORT;
 const mongoURL = process.env.MONGO_URL;
 
 app.use(express.json());
-app.use("/auth",Auth,Protect);
-app.use("/api",Guest);
+app.use("/api",auth,authRoutes);
+app.use("/api",guestRoutes);
 
 mongoose.connect(mongoURL);
 

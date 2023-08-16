@@ -6,10 +6,10 @@ import Bcrypt from "bcrypt";
 
 dotenv.config();
 
-const Guest = express.Router();
+const guestRoutes = express.Router();
 const jwtSecret = process.env.JWT_SECRET;
 
-Guest.post("/register",(req,res)=>{
+guestRoutes.post("/register",(req,res)=>{
 
     const {name,email,password} = req.body;
 
@@ -43,7 +43,7 @@ Guest.post("/register",(req,res)=>{
         });   
 });
 
-Guest.post("/login",(req,res)=>{
+guestRoutes.post("/login",(req,res)=>{
     const {email, password} = req.body;
 
     if(!email || !password)
@@ -88,10 +88,10 @@ Guest.post("/login",(req,res)=>{
         })
 });
 
-Guest.get("/logout", (req,res)=>{
+guestRoutes.get("/logout", (req,res)=>{
     res.clearCookie('token');
     res.status(200).json({message:"Logout Successfull"});
     
 })
 
-export default Guest;
+export default guestRoutes;

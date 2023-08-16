@@ -4,9 +4,9 @@ import User from "../models/userModel.js";
 
 dotenv.config();
 
-const Protect = express.Router();
+const authRoutes = express.Router();
 
-Protect.get("/userlist",  (req, res) => {
+authRoutes.get("/users",  (req, res) => {
     User.find()
         .then(users => {
             if (users.length > 0) 
@@ -25,4 +25,4 @@ Protect.get("/userlist",  (req, res) => {
         });
 });
 
-export default Protect;
+export default authRoutes;
