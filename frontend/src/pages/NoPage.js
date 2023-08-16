@@ -1,17 +1,17 @@
 import React, { useEffect } from 'react';
 import Error from '../images/NoPage.png';
 import { useNavigate } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
 
-const NoPage = () => {
+
+const NoPage = (loggedInUser) => {
     const navigate = useNavigate();
-    const [cookies] = useCookies(['user']);
+    const user = loggedInUser;
 
     useEffect(() => {
-        if (cookies.user) {
+        if (user) {
             navigate('/profile');
         }
-    }, [cookies.user]);
+    }, [user]);
 
     return (
         <div className="text-center">

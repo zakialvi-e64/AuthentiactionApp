@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useCookies } from 'react-cookie';
 import mainImage from '../images/MainImage.png';
 import { toast } from 'react-toastify';
 import { Link, useNavigate } from 'react-router-dom';
 
 
-const LoginPage = () => {
-    const [cookies, setCookie] = useCookies(['userInfo']);
+const LoginPage = ({ updateLoggedInUser, loggedInUser }) => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const user = loggedInUser;
+    console.log(user)
     
     
 
     useEffect(() => {
-        if (cookies.userInfo) {
+        if (loggedInUser) {
             navigate('/profile');
         }
-    }, [cookies.userInfo]);
+    }, [loggedInUser]);
 
     
 
@@ -56,7 +56,7 @@ const LoginPage = () => {
                     notifyError("Invalid Password");
                 } else {
                     notifySuccess('Signed In Successfully');
-                    setCookie('userInfo', data.userInfo);
+                    updateLoggedInUser(data.userInfo);
                     navigate('/profile');
                 }
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -11,16 +11,22 @@ import Profile from './pages/ProfilePage';
 import NoPage from './pages/NoPage';
 
 function App() {
+  const [loggedInUser, setLoggedInUser] = useState(null);
+
+  const updateLoggedInUser = (user) => {
+    setLoggedInUser(user);
+  };
+
   return (
     <BrowserRouter>
       <div className="App">
-        <Navbar />
+        <Navbar updateLoggedInUser={updateLoggedInUser} loggedInUser={loggedInUser}/>
 
         <Routes>
-          <Route path="/" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/profile" element={<Profile />} />
-          <Route path="*" element={<NoPage />} />
+          <Route path="/" element={<Login updateLoggedInUser={updateLoggedInUser} loggedInUser={loggedInUser}/>} />
+          <Route path="/register" element={<Register  loggedInUser={loggedInUser}/>} />
+          <Route path="/profile" element={<Profile  loggedInUser={loggedInUser}/>} />
+          <Route path="*" element={<NoPage  loggedInUser={loggedInUser}/>} />
         </Routes>
 
         <ToastContainer theme="dark" />

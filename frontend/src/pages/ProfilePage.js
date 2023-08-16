@@ -1,20 +1,23 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
 
-const ProfilePage = () => {
+
+const ProfilePage = (loggedInUser) => {
     const [users, setUsers] = useState([]);
     const navigate = useNavigate();
-    const [cookies] = useCookies(['userInfo']);
+    const user = loggedInUser;
+    console.log(user);
 
     useEffect(() => {
-        if (!cookies.userInfo) {
+        if (!user) {
             navigate('/');
+            
+            
         } else {
             fetchUsers();
         }
-    }, [cookies.userInfo]);
+    }, [user]);
 
     const fetchUsers = async () => {
         try {

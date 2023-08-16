@@ -1,20 +1,23 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
 import axios from 'axios';
 
 
-const Navbar = () => {
+const Navbar = ({ loggedInUser, updateLoggedInUser }) => {
     const navigate = useNavigate();
-    const [cookies, , removeCookies] = useCookies(['userInfo']);
-    const user = cookies.userInfo;
+    const user = loggedInUser;
     
 
     const LogOut = () => {
-        axios.get('/logout');
-        removeCookies('userInfo');
-        navigate('/');
-    }
+        axios.get('/logout')
+          .then(() => {
+            updateLoggedInUser(null); 
+            navigate('/');
+          })
+          .catch((error) => {
+            console.error(error);
+          });
+      };
 
     return (
         <div>

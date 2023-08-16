@@ -3,20 +3,20 @@ import { Link, useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 import mainImage from '../images/MainImage.png';
-import { useCookies } from 'react-cookie';
 
-const RegistrationPage = () => {
+
+const RegistrationPage = (loggedInUser) => {
     const navigate = useNavigate();
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [cookies] = useCookies(['userInfo']);
+    const user = loggedInUser;
 
     useEffect(() => {
-        if (cookies.userInfo) {
+        if (user) {
             navigate('/profile');
         }
-    }, [cookies.userInfo]);
+    }, [user]);
 
     // Toast Functions
     const notifyError = (msg) => toast.error(msg);
