@@ -6,10 +6,10 @@ import Bcrypt from "bcrypt";
 
 dotenv.config();
 
-const Router = express.Router();
+const Guest = express.Router();
 const jwtSecret = process.env.JWT_SECRET;
 
-Router.post("/register",(req,res)=>{
+Guest.post("/register",(req,res)=>{
 
     const {name,email,password} = req.body;
 
@@ -43,7 +43,7 @@ Router.post("/register",(req,res)=>{
         });   
 });
 
-Router.post("/login",(req,res)=>{
+Guest.post("/login",(req,res)=>{
     const {email, password} = req.body;
 
     if(!email || !password)
@@ -66,14 +66,14 @@ Router.post("/login",(req,res)=>{
                         const payload = {_id: savedUser._id, name: savedUser.name};
                         const token = Jwt.sign(payload, jwtSecret);
 
+                        savedUser.token = token;
+                        savedUser.save();
 
-                        res.cookie('token',token,{
-                            httpOnly: true,
-                        })
+                        const {name, email, _id} = savedUser;
 
-                        const {name, email} = savedUser;
-
-                        res.json({ userInfo:{name, email}})
+                        res.status(200)
+                        .header("Authorization", `Bearer ${token}`)
+                        .json({ userInfo: { name, email, _id }, token });
                     }
                     else
                     {
@@ -88,29 +88,10 @@ Router.post("/login",(req,res)=>{
         })
 });
 
-Router.get("/logout", (req,res)=>{
+Guest.get("/logout", (req,res)=>{
     res.clearCookie('token');
     res.status(200).json({message:"Logout Successfull"});
     
 })
 
-Router.get("/usersList", (req, res) => {
-    User.find()
-        .then(users => {
-            if (users.length > 0) 
-            {
-                res.status(200).json(users);
-                
-            } 
-            else 
-            {
-                res.status(404).json();
-            }
-        })
-        .catch(err => {
-            console.log(err);
-            res.status(500).json();
-        });
-});
-
-export default Router;
+export default Guest;
